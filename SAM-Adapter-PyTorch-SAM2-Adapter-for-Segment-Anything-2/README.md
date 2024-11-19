@@ -11,8 +11,12 @@ pip install -r requirements.txt
 1. Download the dataset and put it in ./load.
 2. Download the pre-trained [SAM 2(Segment Anything)](https://github.com/facebookresearch/segment-anything-2) and put it in ./pretrained.
 3. Training:
+distributed:
 ```bash
-CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.run --nnodes 1 --nproc_per_node 4 loadddptrain.py --config configs/demo.yaml
+CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.run --nnodes 1 --nproc_per_node 4 train.py --config configs/demo.yaml
+```
+Single GPU:
+```bash
 python /root/SAM-Adapter-PyTorch-SAM2-Adapter-for-Segment-Anything-2/train.py --config /root/SAM-Adapter-PyTorch-SAM2-Adapter-for-Segment-Anything-2/configs/demo.yaml
 ```
 !Please note that the SAM model consume much memory. We use 4 x A100 graphics card for training. If you encounter the memory issue, please try to use graphics cards with larger memory!
